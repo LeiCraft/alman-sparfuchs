@@ -3,7 +3,7 @@
 	<div id="stock-chart">
 
 	</div>
-	<div class="d-flex info-container justify-content-between">
+	<div class="d-flex info-container justify-content-between" style="margin-top: -45px;">
 		<div>
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 				<input type="radio" class="btn-check" name="btnradio" id="sc-show-5-btn" autocomplete="off" checked>
