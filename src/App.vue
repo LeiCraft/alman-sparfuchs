@@ -1,21 +1,9 @@
-<script setup lang="ts">
-import StockChart from './components/StockChart.vue';
+<script setup>
+
+	import GameView from "./views/GameView.vue"
+
 </script>
 
 <template>
-
-    <header>
-		
-    </header>
-
-    <main>
-
-		<StockChart id="myChart"></StockChart>
-
-    </main>
-
+	<GameView></GameView>
 </template>
-
-<style scoped>
-
-</style>

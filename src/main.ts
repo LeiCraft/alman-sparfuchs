@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-
 import "./assets/style.css"
+
+import Game from "./game.js";
 
 import { createApp } from 'vue'
 import App from './App.vue';

@@ -1,29 +1,18 @@
 import { Chart, type ChartConfiguration, type ChartItem } from "chart.js/auto";
+import type Stock from "./stock";
 
 class StockChartUtils {
 
     static defaultConfig: ChartConfiguration = {
         type: 'line',
         data: {
-            labels: [],
+            labels: ["0"],
             datasets: []
         },
         options: {
-            responsive: true, // Allow chart to resize
-            maintainAspectRatio: false, // Disable aspect ratio constraint
-            animation: {
-                onComplete: function(animation: any) {
-                    const labels = StockChart.chart.data.labels as Array<string>;
-                    if (labels.length > 5) {
-                        const newWidth = (labels.length * 50) + 100;
-                        StockChart.container.style.width = newWidth + 'px';
-                        StockChart.container.style.height = '400px';
-                    }
-                }
-            },
+            responsive: true,
             scales: {
                 y: {
-                    beginAtZero: true,
                     title: {
                         display: true,
                         text: "Wert"
@@ -42,10 +31,6 @@ class StockChartUtils {
                 }
             },
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Chart.js Line Chart'
-                },
                 tooltip: {
                     mode: 'index',
                     intersect: false
@@ -61,33 +46,64 @@ class StockChartUtils {
 export class StockChart {
 
     public static chart: Chart;
-    public static fullContainer: HTMLElement;
     public static container: HTMLElement;
     public static canvas: HTMLElement;
 
     private static initalized: boolean = false;
 
-    static init(parent: HTMLElement) {
+    public static init(parent: HTMLElement) {
         if (this.initalized) return;
-
-        this.fullContainer = document.createElement('div');
-        this.fullContainer.setAttribute("style", "overflow: auto;");
+        this.initalized = true;
 
         this.container = document.createElement('div');
-        this.container.setAttribute("style", "height: 400px; width: 300px;");
+        this.container.setAttribute("style", "height: 400px; width: 100%;");
 
         this.canvas = document.createElement('canvas');
-        this.chart = new Chart(this.canvas as ChartItem, StockChartUtils.defaultConfig);
+        this.canvas.setAttribute("style", "height: 400px; min-width: 100%;");
 
-        parent.appendChild(this.fullContainer);
-        this.fullContainer.appendChild(this.container);
+        parent.appendChild(this.container);
         this.container.appendChild(this.canvas);
+
+        this.chart = new Chart(this.canvas as ChartItem, StockChartUtils.defaultConfig);
     }
 
-    static addRound() {
+    public static addStock(stock: Stock) {
+        this.chart.data.datasets.push({
+            label: stock.name,
+            data: [stock.price],
+            backgroundColor: stock.color,
+            borderColor: stock.color,
+        });
+        return this.chart.data.datasets.length - 1;
+    }
+
+    public static addRound() {
+        const len = (this.chart.data.labels as Array<string>).length;
+        (this.chart.data.labels as Array<string>).push(len.toString());
+    }
+
+    public static addData(index: number, data: number) {
+        this.chart.data.datasets[index].data.push(data);
+    }
+
+    public static show(count: number) {
+
+
 
     }
 
+}
+
+// @ts-ignore
+globalThis.sc = StockChart;
+// @ts-ignore
+globalThis.cadd = function (count = 1) {
+    for (let i = 0; i < count; i++) {
+        const len = (StockChart.chart.data.labels as Array<any>).length;
+        (StockChart.chart.data.labels as Array<any>).push(len.toString());
+        StockChart.chart.data.datasets[0].data[len] = Math.floor(Math.random() * 120);
+        StockChart.chart.update();
+    }
 }
 
 export default StockChart;
