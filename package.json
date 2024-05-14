@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.2"
+  }
+}
