@@ -22,19 +22,19 @@ class Game {
             new Stock(
                 "DAX",
                 100,
-                {high: 6, low: 3},
+                {high: 7, low: 4.25},
                 "rgb(255, 255, 0)"
             ),
             new Stock(
                 "Nvida",
                 100,
-                {high: 7, low: 4},
+                {high: 9, low: 6.25},
                 "rgb(0, 255, 0)"
             ),
             new Stock(
                 "Tesla",
                 100,
-                {high: 9, low: 6},
+                {high: 13, low: 10.5},
                 "rgb(255, 0, 0)"
             ),
         );
