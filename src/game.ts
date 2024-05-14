@@ -13,10 +13,30 @@ class Game {
         this.initalized = true;
 
         this.stocks.push(
-            new Stock("DAX", 100, 3, "rgb(255, 255, 0)"),
-            new Stock("Nvida", 100, 5, "rgb(0, 255, 0)"),
-            new Stock("Tesla", 100, 7, "rgb(255, 0, 0)"),
-            new Stock("LeiCoin", 100, 9, "rgb(0, 255, 255)")
+            new Stock(
+                "LeiCoin",
+                100,
+                {high: 5, low: 2},
+                "rgb(0, 255, 255)"
+            ),
+            new Stock(
+                "DAX",
+                100,
+                {high: 6, low: 3},
+                "rgb(255, 255, 0)"
+            ),
+            new Stock(
+                "Nvida",
+                100,
+                {high: 7, low: 4},
+                "rgb(0, 255, 0)"
+            ),
+            new Stock(
+                "Tesla",
+                100,
+                {high: 9, low: 6},
+                "rgb(255, 0, 0)"
+            ),
         );
 
         StockChart.chart.update();

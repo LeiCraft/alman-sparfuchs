@@ -1,17 +1,21 @@
 import StockChart from "./stockChart";
 
+interface StockStability {
+    high: number;
+    low: number;
+}
 
 class Stock {
 
     public readonly name: string;
     public price: number;
-    public readonly stability: number;
+    public readonly stability: StockStability;
     public readonly history: number[] = [];
     public readonly color: string;
 
     public readonly index: number;
 
-    constructor(name: string, defaultPrice: number, stability: number, color: string) {
+    constructor(name: string, defaultPrice: number, stability: StockStability, color: string) {
         this.name = name;
         this.price = defaultPrice;
         this.stability = stability;
@@ -22,7 +26,7 @@ class Stock {
     }
 
     public calculateNextPrice() {
-        const fluctuation = Math.round((Math.random() * (this.stability + this.stability) - this.stability) * 100) / 100;
+        const fluctuation = Math.round((Math.random() * (this.stability.high + this.stability.high) - this.stability.low) * 100) / 100;
         const newPrice = this.price + fluctuation;
         if (newPrice < 0) {
             this.price = 0.00;
