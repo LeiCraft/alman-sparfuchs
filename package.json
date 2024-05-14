@@ -2,6 +2,9 @@
   "type": "module",
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.2"
+    "chart.js": "^4.4.2",
+    "esbuild": "^0.21.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }
