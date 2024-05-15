@@ -49,8 +49,12 @@ class Stock {
             this.price = newPrice;  
         }
         this.history.push(this.price);
-        (document.getElementById(`stock-price-${this.index}`)?.querySelector(".stock-price-value") as HTMLElement).innerText = newPrice.toString();
+        this.setShowPrice(newPrice);
         return this.price;
+    }
+
+    public setShowPrice(price: number) {
+        (document.getElementById(`stock-price-${this.index}`)?.querySelector(".stock-price-value") as HTMLElement).innerText = price.toString();
     }
 
 }

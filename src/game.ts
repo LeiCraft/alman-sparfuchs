@@ -100,6 +100,7 @@ class Game {
             stock.history = [100];
             StockChart.clearData(stock.index);
             StockChart.addData(stock.index, 100);
+            stock.setShowPrice(100);
         }
         StockChart.chart.update();
     }
