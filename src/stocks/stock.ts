@@ -5,12 +5,21 @@ interface StockStability {
     low: number;
 }
 
+class StockUtils {
+
+    static roundToTwo(input: number) {
+        input = Math.round(parseFloat(input.toString() + "e2"));
+        return Number(input.toString() + "e-2");
+    }
+
+}
+
 class Stock {
 
     public readonly name: string;
     public price: number;
     public readonly stability: StockStability;
-    public readonly history: number[] = [];
+    public history: number[] = [];
     public readonly color: string;
 
     public readonly index: number;
@@ -23,17 +32,24 @@ class Stock {
         this.history.push(this.price);
 
         this.index = StockChart.addStock(this);
+
+        (document.getElementById("current-prices") as HTMLElement).innerHTML += `
+            <div id="stock-price-${this.index}" class="stock-price h4 me-3">
+                ${name}: <span class="stock-price-value">100</span>€
+            </div>
+        `;
     }
 
     public calculateNextPrice() {
-        const fluctuation = Math.round((Math.random() * (this.stability.high + this.stability.high) - this.stability.low) * 100) / 100;
-        const newPrice = this.price + fluctuation;
+        const fluctuation = Math.random() * (this.stability.high + this.stability.high) - this.stability.low;
+        const newPrice = StockUtils.roundToTwo(this.price + fluctuation);
         if (newPrice < 0) {
             this.price = 0.00;
         } else {
-            this.price = newPrice;
+            this.price = newPrice;  
         }
         this.history.push(this.price);
+        (document.getElementById(`stock-price-${this.index}`)?.querySelector(".stock-price-value") as HTMLElement).innerText = newPrice.toString();
         return this.price;
     }
 

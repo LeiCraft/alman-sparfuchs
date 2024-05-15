@@ -6,27 +6,40 @@ class StockChartUtils {
     static defaultConfig: ChartConfiguration = {
         type: 'line',
         data: {
-            labels: ["0"],
+            labels: [],
             datasets: []
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 y: {
                     title: {
                         display: true,
-                        text: "Wert"
+                        text: "Wert",
+                        color: "white"
                     },
                     ticks: {
                         callback: function(value, index, ticks) {
                             return value + '€';
-                        }
+                        },
+                        color: "rgb(255,255,255)"
+                    },
+                    grid: {
+                        color: "white"
                     }
                 },
                 x: {
                     title: {
                         display: true,
-                        text: "Runden"
+                        text: "Runden",
+                        color: "white"
+                    },
+                    ticks: {
+                        color: "white"
+                    },
+                    grid: {
+                        color: "white"
                     }
                 }
             },
@@ -37,6 +50,9 @@ class StockChartUtils {
                 },
                 legend: {
                     position: "bottom",
+                    labels: {
+                        color: "white"
+                    }
                 }
             }
         }
@@ -51,17 +67,16 @@ export class StockChart {
 
     private static initalized: boolean = false;
 
-    public static init(parent: HTMLElement) {
+    public static init() {
         if (this.initalized) return;
         this.initalized = true;
 
         this.container = document.createElement('div');
-        this.container.setAttribute("style", "height: 400px; width: 100%;");
+        this.container.setAttribute("style", "min-height: 90vh; height: 400px; width: 100%;");
 
         this.canvas = document.createElement('canvas');
-        this.canvas.setAttribute("style", "height: 400px; min-width: 100%;");
 
-        parent.appendChild(this.container);
+        (document.getElementById("stock-chart") as HTMLElement).appendChild(this.container);
         this.container.appendChild(this.canvas);
 
         this.chart = new Chart(this.canvas as ChartItem, StockChartUtils.defaultConfig);
@@ -84,6 +99,10 @@ export class StockChart {
 
     public static addData(index: number, data: number) {
         this.chart.data.datasets[index].data.push(data);
+    }
+
+    public static clearData(index: number) {
+        this.chart.data.datasets[index].data = [];
     }
 
     public static show(count: number) {

@@ -1,6 +1,10 @@
+import "./assets/style.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import "./assets/style.css"
+
+import "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 import { createApp } from 'vue';
 // @ts-ignore

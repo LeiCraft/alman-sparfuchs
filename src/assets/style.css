@@ -1,9 +1,10 @@
 body {
-    font-family: "Rubik", sans-serif;
-    background-color: #0b0c1b;
+    font-family: "Rubik", sans-serif !important;
+    background-color: #0b0c1b !important;
+    color: white !important;
 }
 
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 1400px) {
     .container-xxl {
       min-width: 100%;
       margin-left: auto;
