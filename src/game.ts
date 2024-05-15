@@ -68,6 +68,8 @@ class Game {
             if (cookieString) {
                 const serializedArray = decodeURIComponent(cookieString.split('=')[1]);
                 stock.history = JSON.parse(serializedArray);
+                stock.price = stock.history[stock.history.length - 1];
+                stock.setShowPrice(stock.price);
                 StockChart.clearData(stock.index);
                 for (const item of stock.history) {
                     StockChart.addData(stock.index, item);
